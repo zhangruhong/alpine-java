@@ -11,6 +11,7 @@ jobs:
           # 登录阿里云镜像仓库
           docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }} registry.cn-hangzhou.aliyuncs.com
           pwd & ls -al
+          cd .. & pwd & ls -al
           # 使用Dockerfile构建镜像
           docker build . --file dockerfile --tag registry.cn-hangzhou.aliyuncs.com/cdyb/alpine-java:openjdk17_cn_slim
           # 推送镜像到镜像仓库
