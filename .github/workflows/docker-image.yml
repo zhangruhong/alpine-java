@@ -1,10 +1,14 @@
 name: Docker Image CI
 on:
-  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
       - name: Build the Docker image
         run: |
           docker version
@@ -16,3 +20,5 @@ jobs:
           docker build . --file dockerfile --tag registry.cn-hangzhou.aliyuncs.com/cdyb/alpine-java:openjdk17_cn_slim
           # 推送镜像到镜像仓库
           docker push registry.cn-hangzhou.aliyuncs.com/cdyb/alpine-java:openjdk17_cn_slim
+
+
